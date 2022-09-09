@@ -128,14 +128,20 @@ async function makePayment(creditCardData, paymentData) {
  * @returns { Promise<boolean> }
  */
 async function paymentProcess(person, creditCardData, paymentData) {
-  const isCreditCardValid = await checkCreditCardValidity(creditCardData);
-  if (!isCreditCardValid) {
-    return "INVALID_CARD";
+  const validInput =
+    checkCreditCardObject(creditCardData) && checkPaymentObject(paymentData);
+  if (!validInput) {
+    return "INVALID_INPUT";
   }
 
   const isPersonValid = checkPersonObject(person);
   if (!isPersonValid) {
     return "INVALID_PERSON";
+  }
+
+  const isCreditCardValid = await checkCreditCardValidity(creditCardData);
+  if (!isCreditCardValid) {
+    return "INVALID_CARD";
   }
 
   const paymentResult = await makePayment(creditCardData, paymentData);
