@@ -40,7 +40,11 @@ function checkCreditCardObject(creditCard) {
  * @returns {boolean}
  */
 function checkPaymentObject(payment) {
-  if (payment && typeof payment.sum === "number") {
+  if (
+    payment &&
+    typeof payment.sum === "number" &&
+    Math.sign(payment.sum) === 1
+  ) {
     return true;
   }
   return false;
