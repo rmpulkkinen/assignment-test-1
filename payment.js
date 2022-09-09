@@ -130,16 +130,19 @@ async function makePayment(creditCardData, paymentData) {
 async function paymentProcess(person, creditCardData, paymentData) {
   const isCreditCardValid = await checkCreditCardValidity(creditCardData);
   if (!isCreditCardValid) {
-    return false;
+    return "INVALID_CARD";
   }
 
   const isPersonValid = checkPersonObject(person);
   if (!isPersonValid) {
-    return false;
+    return "INVALID_PERSON";
   }
 
   const paymentResult = await makePayment(creditCardData, paymentData);
-  return paymentResult;
+  if (!paymentResult) {
+    return "PAYMENT_FAILED";
+  }
+  return "OK";
 }
 
 module.exports = {
