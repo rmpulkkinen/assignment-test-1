@@ -58,7 +58,7 @@ describe("objects", () => {
     expect(checkCreditCardObject(cc2)).toBe(false);
   });
 
-  it.skip("American Express cards should not be accepted", () => {
+  it("American Express cards should not be accepted", () => {
     const cc1 = {
       number: "37234567012345",
       cvc: "123",

@@ -23,6 +23,7 @@ function checkCreditCardObject(creditCard) {
   if (
     creditCard &&
     creditCard.number &&
+    creditCard.number.slice(0, 2) !== ("34" || "37") &&
     creditCard.cvc &&
     creditCard.number.length === 16
   ) {
