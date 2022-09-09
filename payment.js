@@ -6,7 +6,7 @@
  * @returns {boolean}
  */
 function checkPersonObject(person) {
-  if (person && person.firstName && person.middleName && person.lastName) {
+  if (person && person.firstName && person.lastName) {
     return true;
   }
   return false;
@@ -82,7 +82,8 @@ async function checkCreditCardValidity(creditCardData) {
  * @returns { Promise<boolean> }
  */
 async function makePayment(creditCardData, paymentData) {
-  const validArgs = checkCreditCardObject(creditCardData) && checkPaymentObject(paymentData);
+  const validArgs =
+    checkCreditCardObject(creditCardData) && checkPaymentObject(paymentData);
   if (!validArgs) {
     return false;
   }
@@ -112,12 +113,12 @@ async function makePayment(creditCardData, paymentData) {
  * @param {*} paymentData A payment data object according to PihiGroup CC Spec
  * @returns { Promise<boolean> }
  */
-async function paymentProcess(person, creditCardData, paymentData) {  
+async function paymentProcess(person, creditCardData, paymentData) {
   const isCreditCardValid = await checkCreditCardValidity(creditCardData);
   if (!isCreditCardValid) {
     return false;
   }
-  
+
   const isPersonValid = checkPersonObject(person);
   if (!isPersonValid) {
     return false;
