@@ -32,7 +32,7 @@ describe("creditcard", () => {
     expect(isValidCard).toBe(false);
   });
 
-  it.skip("test checkCreditCardValidity when faulty endpoint", async () => {
+  it("test checkCreditCardValidity when faulty endpoint", async () => {
     fetch.mockReject(() => Promise.reject("API error"));
 
     const cc = {
@@ -59,6 +59,18 @@ describe("payment", () => {
 
   it("test invalid payment", async () => {
     fetch.mockResponseOnce(JSON.stringify({ ok: false }));
+
+    const cc = {
+      number: "0123456789012345",
+      cvc: "123",
+    };
+    const payment = { sum: 10 };
+    const isOkPayment = await makePayment(cc, payment);
+    expect(isOkPayment).toBe(false);
+  });
+
+  it("test payment when faulty endpoint", async () => {
+    fetch.mockReject(() => Promise.reject("API error"));
 
     const cc = {
       number: "0123456789012345",
